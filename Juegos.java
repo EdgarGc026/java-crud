@@ -38,7 +38,7 @@ public class Juegos<bolita> extends javax.swing.JFrame implements KeyListener {
 		while(true){
 			frame.repaint();
 			frame.moverMundo();
-			Thread.sleep(190);///AQUI ME DARA UN ERROR LE DOY A LA X Y ELIJO EL 1ERO
+			Thread.sleep(11900);///AQUI ME DARA UN ERROR LE DOY A LA X Y ELIJO EL 1ERO
 		}
 	}
 
