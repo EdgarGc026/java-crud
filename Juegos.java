@@ -31,7 +31,8 @@ public class Juegos<bolita> extends javax.swing.JFrame implements KeyListener {
 
 	public static void main(String[] args) throws InterruptedException {
 		Conectar conectar = new Conectar();
-		conectar.conexion();
+		conectar.consultarTodos();
+		conectar.insertarPuntaje(1,0,1);
 		Juegos frame = new Juegos();
 		frame.setVisible(true);
 
@@ -77,12 +78,7 @@ public class Juegos<bolita> extends javax.swing.JFrame implements KeyListener {
 		menuBar.add(menuResultado);
 
 		menuVerResultados = new JMenuItem("Ver resultados");
-		menuResultado.add(menuVerResultados);
-
-
-		menuVerResultados.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
+		menuResultado.add(menuVerResultados); menuVerResultados.addActionListener(new ActionListener() { @Override public void actionPerformed(ActionEvent e) {
 				System.out.println("Ver resultados puchado");
 				menuResultadoActionPerformed(e);
 			}
@@ -119,11 +115,11 @@ public class Juegos<bolita> extends javax.swing.JFrame implements KeyListener {
 		Graphics2D g2d=(Graphics2D)g;
 		
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,(RenderingHints.VALUE_ANTIALIAS_ON));
-		g2d.setColor(Color.GREEN);
+		g2d.setColor(Color.WHITE);
 		bolita.pintarBola(g2d);
-		g2d.setColor(Color.RED);
+		g2d.setColor(Color.WHITE);
 		raquetita1.pintarRaqueta1(g2d);
-		g2d.setColor(Color.YELLOW);
+		g2d.setColor(Color.WHITE);
 		raquetita2.pintarRaqueta2(g2d);
 	}
 
