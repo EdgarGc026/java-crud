@@ -68,12 +68,33 @@ public class Conectar {
  public String consultarPuntaje(int playerNumber){
 	String puntaje = null;
 	 ArrayList<String[]> puntajes = new ArrayList<String[]>();
-	String selectAllScore = "select sum(puntaje_jugador"+playerNumber+") from pong.juego";
+	String selectSum  = "select sum(puntaje_jugador"+playerNumber+") from pong.juego";
 	ResultSet resultset = null;
 
 	try( Connection conector = conexion();Statement stament = conector.createStatement();){
 
-	  resultset = stament.executeQuery(selectAllScore);
+	  resultset = stament.executeQuery(selectSum);
+	  if(resultset.next())
+	  	puntaje = resultset.getString(1);
+	  cerrarConexion(conector);
+	  System.out.println(puntaje);
+	  return puntaje;
+
+	}catch(SQLException e){
+		e.printStackTrace();
+	}
+	return null;
+ }
+// Recibe 1 o 0 segun el jugador que se consulte
+public String consultarPartidas(int playerBool){
+	String puntaje = null;
+	 ArrayList<String[]> puntajes = new ArrayList<String[]>();
+	String selectCount = "select count(ganador) from pong.juego where ganador ="+ playerBool;
+	ResultSet resultset = null;
+
+	try( Connection conector = conexion();Statement stament = conector.createStatement();){
+
+	  resultset = stament.executeQuery(selectCount);
 	  if(resultset.next())
 	  	puntaje = resultset.getString(1);
 	  cerrarConexion(conector);
