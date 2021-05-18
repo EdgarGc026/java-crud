@@ -36,7 +36,7 @@ public class Conectar {
       ex.printStackTrace();
     }
   }
-
+// Queries
   public String [] [] consultarTodos(){
 	ArrayList<String[]> puntajes = new ArrayList<String[]>();
 	String selectAllScore = "SELECT * from pong.juego";
@@ -65,7 +65,28 @@ public class Conectar {
 	}
 	return null;
  }
+ public String consultarPuntaje(int playerNumber){
+	String puntaje = null;
+	 ArrayList<String[]> puntajes = new ArrayList<String[]>();
+	String selectAllScore = "select sum(puntaje_jugador"+playerNumber+") from pong.juego";
+	ResultSet resultset = null;
 
+	try( Connection conector = conexion();Statement stament = conector.createStatement();){
+
+	  resultset = stament.executeQuery(selectAllScore);
+	  if(resultset.next())
+	  	puntaje = resultset.getString(1);
+	  cerrarConexion(conector);
+	  System.out.println(puntaje);
+	  return puntaje;
+
+	}catch(SQLException e){
+		e.printStackTrace();
+	}
+	return null;
+ }
+
+// Inserts
   public void insertarPuntaje(int puntPlayer1, int puntPlayer2, int ganador){
 	String insertScore = "INSERT INTO pong.juego (puntaje_jugador1, puntaje_jugador2, ganador) VALUES ("+ puntPlayer1 +","+ puntPlayer2 + "," + ganador + ")";
 	ResultSet resultset = null;
@@ -75,7 +96,7 @@ public class Conectar {
 
             // Print the ID of the inserted row.
             while (resultset.next()) {
-                System.out.println("Generated: " + resultset.getString(1));
+                System.out.println("Generated: " + resultset.getString(0));
             }  
 	    cerrarConexion(conector);
 
