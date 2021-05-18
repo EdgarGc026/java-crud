@@ -8,14 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 
 public class Juegos<bolita> extends javax.swing.JFrame implements KeyListener {
-
-
 	private JPanel panel;
 	private Bola bolita;
 	private Raqueta raquetita1;
@@ -33,14 +30,13 @@ public class Juegos<bolita> extends javax.swing.JFrame implements KeyListener {
 		Conectar conectar = new Conectar();
 		conectar.consultarTodos();
 		conectar.consultarPuntaje(1);
-		//conectar.insertarPuntaje(1,0,1);
-		Juegos frame = new Juegos();
-		frame.setVisible(true);
 
+		Juegos frame = new Juegos();
 		while(true){
-			frame.repaint();
+			frame.setVisible(true);
 			frame.moverMundo();
-			Thread.sleep(11900);///AQUI ME DARA UN ERROR LE DOY A LA X Y ELIJO EL 1ERO
+			frame.repaint();
+			Thread.sleep(900);
 		}
 	}
 
@@ -142,6 +138,7 @@ public class Juegos<bolita> extends javax.swing.JFrame implements KeyListener {
 
 		if(bolita.TocaFondo()){
 			gameOver();
+
 		}
 		
 	}
@@ -184,19 +181,26 @@ public class Juegos<bolita> extends javax.swing.JFrame implements KeyListener {
 		// TODO Auto-generated method stub
 		
 	}
+
 	public void gameOver() {
 		//Sonido.FONDO.stop();
 		//Sonido.GAMEOVER.play();
 		if(golpes > golpes2){
 			JOptionPane.showMessageDialog(this, "El jugador 1 ganó", "Game Over", JOptionPane.YES_NO_OPTION);
-			System.exit(0);
+			labelcontador.setText("0");
+			labelcontador2.setText("0");
+			//System.exit(0);
 		}else{
 			if(golpes < golpes2){
 				JOptionPane.showMessageDialog(this, "El jugador 2 ganó", "Game Over", JOptionPane.YES_NO_OPTION);
-				System.exit(0);
+				labelcontador.setText("0");
+				labelcontador2.setText("0");
+				//System.exit(0);
 			}else{
 				JOptionPane.showMessageDialog(this, "Empate", "Game Over", JOptionPane.YES_NO_OPTION);
-				System.exit(0);
+				labelcontador.setText("0");
+				labelcontador2.setText("0");
+				//System.exit(0);
 			}
 		}
 	}

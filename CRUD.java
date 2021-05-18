@@ -12,6 +12,7 @@ public class CRUD extends JFrame{
   private JFrame JFrame_myFrame;
   private JTable JTable_myTable;
   private JScrollPane JScrollPane_myJScroll;
+
   public CRUD(){
     //Creamos el Frame donde estaremos mostrando el crude
     this.setTitle("Estadisticas");
@@ -51,33 +52,5 @@ public class CRUD extends JFrame{
     JScrollPane JScrollPane_myPane = new JScrollPane(JTable_myTable);
     JTable_myTable.setFillsViewportHeight(true);
     add(JScrollPane_myPane);
-  }
-
-  public void getData(){
-    try{
-      Conectar conectar = new Conectar();
-      Connection connection = conectar.conexion();
-
-      DefaultTableModel model = new DefaultTableModel();
-      model.addColumn("ID");
-      model.addColumn("Jugador1");
-      model.addColumn("Jugador2");
-      model.addColumn("Ganador");
-      String[] data = new String[4];
-
-      Statement statement = connection.createStatement();
-      ResultSet resultSet = statement.executeQuery("SELECT * FROM juego");
-      while (resultSet.next()){
-        data[0] = resultSet.getString(1);
-        data[1] = resultSet.getString(2);
-        data[2] = resultSet.getString(3);
-        data[3] = resultSet.getString(4);
-        model.addRow(data);
-      }
-      JTable_myTable.setModel(model);
-    }catch(Exception ex){
-      System.out.println("Error: "+ ex.getMessage());
-      System.out.println("Error a la hora de mostrar los datos");
-    }
   }
 }
