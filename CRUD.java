@@ -22,10 +22,8 @@ public class CRUD extends JFrame{
 
     //Agregando datos para la tabla
     String[] columnNames = {"Id", "Jugador 1", "Jugador 2", "Ganador"};
-    String[][] data = {
-        {"1", "3", "6", "0"},
-        {"2", "4", "2", "1"}
-    };
+    Conectar conectar = new Conectar();
+    String[][] data = conectar.consultarTodos();
 
     //Agreguemos datos de tablas y demas
     JTable JTable_myTable = new JTable(data, columnNames);

@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Conectar {
   private final String urlHost = "jdbc:mysql://localhost/pong?"; 
@@ -34,23 +36,57 @@ public class Conectar {
       ex.printStackTrace();
     }
   }
-
-  public void consultarTodos(){
+// Queries
+  public String [] [] consultarTodos(){
+	ArrayList<String[]> puntajes = new ArrayList<String[]>();
 	String selectAllScore = "SELECT * from pong.juego";
 	ResultSet resultset = null;
+
 	try( Connection conector = conexion();Statement stament = conector.createStatement();){
+
 	  resultset = stament.executeQuery(selectAllScore);
 	  while(resultset.next()){
-	    System.out.println(resultset.getString(2) + " " + resultset.getString(3));
+	    String[] array = {resultset.getString(1),resultset.getString(2),resultset.getString(3), resultset.getString(4)};
+	    puntajes.add(array);
 	  }
-	  cerrarConexion(conector);
 
+	  String[][] array = new String[puntajes.size()][];
+	  for (int i = 0; i < puntajes.size(); i++) {
+	      array[i] = puntajes.get(i);
+	  }
+
+	  System.out.println(Arrays.deepToString(array));
+
+	  cerrarConexion(conector);
+	  return array;
 
 	}catch(SQLException e){
 		e.printStackTrace();
 	}
+	return null;
+ }
+ public String consultarPuntaje(int playerNumber){
+	String puntaje = null;
+	 ArrayList<String[]> puntajes = new ArrayList<String[]>();
+	String selectAllScore = "select sum(puntaje_jugador"+playerNumber+") from pong.juego";
+	ResultSet resultset = null;
+
+	try( Connection conector = conexion();Statement stament = conector.createStatement();){
+
+	  resultset = stament.executeQuery(selectAllScore);
+	  if(resultset.next())
+	  	puntaje = resultset.getString(1);
+	  cerrarConexion(conector);
+	  System.out.println(puntaje);
+	  return puntaje;
+
+	}catch(SQLException e){
+		e.printStackTrace();
+	}
+	return null;
  }
 
+// Inserts
   public void insertarPuntaje(int puntPlayer1, int puntPlayer2, int ganador){
 	String insertScore = "INSERT INTO pong.juego (puntaje_jugador1, puntaje_jugador2, ganador) VALUES ("+ puntPlayer1 +","+ puntPlayer2 + "," + ganador + ")";
 	ResultSet resultset = null;
@@ -60,7 +96,7 @@ public class Conectar {
 
             // Print the ID of the inserted row.
             while (resultset.next()) {
-                System.out.println("Generated: " + resultset.getString(1));
+                System.out.println("Generated: " + resultset.getString(0));
             }  
 	    cerrarConexion(conector);
 
