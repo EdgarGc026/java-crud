@@ -1,14 +1,6 @@
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
 import javax.swing.border.EmptyBorder;
 
 
@@ -25,18 +17,21 @@ public class Juegos<bolita> extends javax.swing.JFrame implements KeyListener {
 	private JMenuBar menuBar;
 	private JMenu menuResultado;
 	private JMenuItem menuVerResultados;
+	private static boolean continuar = true;
 
 	public static void main(String[] args) throws InterruptedException {
+
 		Conectar conectar = new Conectar();
 		conectar.consultarTodos();
 		//conectar.consultarPuntaje(1);
-
 		Juegos frame = new Juegos();
-		while(true){
-			frame.setVisible(true);
-			frame.moverMundo();
-			frame.repaint();
-			Thread.sleep(900);
+		while(true) {
+			if(continuar){
+				frame.moverMundo();
+				frame.repaint();
+				frame.setVisible(true);
+				Thread.sleep(300);
+			}
 		}
 	}
 
@@ -45,6 +40,7 @@ public class Juegos<bolita> extends javax.swing.JFrame implements KeyListener {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(450, 100, 640, 450);
+
 
 		panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -78,6 +74,7 @@ public class Juegos<bolita> extends javax.swing.JFrame implements KeyListener {
 		menuResultado.add(menuVerResultados); menuVerResultados.addActionListener(new ActionListener() { @Override public void actionPerformed(ActionEvent e) {
 				System.out.println("Ver resultados puchado");
 				menuResultadoActionPerformed(e);
+				continuar = false;
 			}
 		});
 
@@ -104,6 +101,7 @@ public class Juegos<bolita> extends javax.swing.JFrame implements KeyListener {
 	public void menuResultadoActionPerformed(ActionEvent event){
 		CRUD crud = new CRUD();
 		crud.setVisible(true);
+		boolean bandera = false;
 	}
 
 	public void  paint(Graphics g ){
@@ -203,5 +201,8 @@ public class Juegos<bolita> extends javax.swing.JFrame implements KeyListener {
 				//System.exit(0);
 			}
 		}
+		bolita = new Bola(getWidth(), getHeight());
+		raquetita1 = new Raqueta(getHeight());
+		raquetita2 = new Raqueta2(getHeight());
 	}
 }
