@@ -13,13 +13,9 @@ public class CRUD extends JFrame{
   private JPanel jpanel;
   private JFrame JFrame_myFrame;
   private JTable JTable_myTable;
-<<<<<<< HEAD
-  private JScrollPane JScrollPane_myJScroll;
 
-=======
   private JLabel labelTitle1, labelHighScore, labelTitle2, labelLastWinner;
  private JScrollPane JScrollPane_myJScroll;
->>>>>>> 11fb35af1bdf14797789dbbadad5ca01622e3fa1
   public CRUD(){
     String ganadorConcurrente = topPlayer();
     String mayorPuntaje = hightScorePlayer();
@@ -64,9 +60,9 @@ public class CRUD extends JFrame{
 
     JScrollPane JScrollPane_myPane = new JScrollPane(JTable_myTable);
     JTable_myTable.setFillsViewportHeight(true);
-<<<<<<< HEAD
+
     add(JScrollPane_myPane);
-=======
+
     //add(JScrollPane_myPane);
 
     labelTitle1 = new JLabel("La puntuacion mas alta es:");
@@ -116,6 +112,6 @@ public class CRUD extends JFrame{
 	   topplayer = "Jugador 2 con " + scorePlayer1 + " partidas ganadas";
 
 	return topplayer;
->>>>>>> 11fb35af1bdf14797789dbbadad5ca01622e3fa1
+
   }
 }

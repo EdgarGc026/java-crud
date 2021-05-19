@@ -29,7 +29,7 @@ public class Juegos<bolita> extends javax.swing.JFrame implements KeyListener {
 	public static void main(String[] args) throws InterruptedException {
 		Conectar conectar = new Conectar();
 		conectar.consultarTodos();
-		conectar.consultarPuntaje(1);
+		//conectar.consultarPuntaje(1);
 
 		Juegos frame = new Juegos();
 		while(true){

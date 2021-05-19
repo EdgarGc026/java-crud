@@ -72,13 +72,9 @@ public class Conectar {
  }
  public String consultarPuntaje(int playerNumber){
 	String puntaje = null;
-<<<<<<< HEAD
- 	ArrayList<String[]> puntajes = new ArrayList<String[]>();
-	String selectAllScore = "select sum(puntaje_jugador"+playerNumber+") from pong.juego";
-=======
+
 	 ArrayList<String[]> puntajes = new ArrayList<String[]>();
 	String selectSum  = "select sum(puntaje_jugador"+playerNumber+") from pong.juego";
->>>>>>> 11fb35af1bdf14797789dbbadad5ca01622e3fa1
 	ResultSet resultset = null;
 
 	try( Connection conector = conexion();Statement stament = conector.createStatement();){
