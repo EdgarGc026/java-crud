@@ -32,7 +32,6 @@ public class Juegos<bolita> extends javax.swing.JFrame implements KeyListener {
 				frame.repaint();
 				frame.setVisible(true);
 				Thread.sleep(300);
-				System.out.println("Pero, por aca ando, tambien we");
 			}
 			System.out.println("Entre aqui");
 		}
@@ -190,22 +189,34 @@ public class Juegos<bolita> extends javax.swing.JFrame implements KeyListener {
 	public void gameOver() {
 		//Sonido.FONDO.stop();
 		//Sonido.GAMEOVER.play();
+		Conectar conectar = new Conectar();
 		if(golpes > golpes2){
 			JOptionPane.showMessageDialog(this, "El jugador 1 ganó", "Game Over", JOptionPane.YES_NO_OPTION);
-			labelcontador.setText("0");
-			labelcontador2.setText("0");
+			if(conectar.insertarPuntaje(golpes,golpes2,1)){
+			    labelcontador.setText("0");
+			    labelcontador2.setText("0");
+			    golpes = 0;
+			    golpes2 = 0;
+			}
 			//System.exit(0);
 		}else{
 			if(golpes < golpes2){
 				JOptionPane.showMessageDialog(this, "El jugador 2 ganó", "Game Over", JOptionPane.YES_NO_OPTION);
-				labelcontador.setText("0");
-				labelcontador2.setText("0");
-				//System.exit(0);
+				if(conectar.insertarPuntaje(golpes,golpes2,0)){
+				    labelcontador.setText("0");
+				    labelcontador2.setText("0");
+				    golpes = 0;
+				    golpes2 = 0;
+
+				}	//System.exit(0);
 			}else{
 				JOptionPane.showMessageDialog(this, "Empate", "Game Over", JOptionPane.YES_NO_OPTION);
-				labelcontador.setText("0");
-				labelcontador2.setText("0");
-				//System.exit(0);
+				if(conectar.insertarPuntaje(golpes,golpes2,2)){
+				    labelcontador.setText("0");
+				    labelcontador2.setText("0");
+				    golpes = 0;
+				    golpes2 = 0;
+				}				
 			}
 		}
 		bolita = new Bola(getWidth(), getHeight());

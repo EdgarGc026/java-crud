@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class Conectar {
   private final String urlHost = "jdbc:mysql://localhost/pong?"; 
   private final String urlSettings = "useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&";
-  private final String urlCredentials = "user=root&password=root";
+  private final String urlCredentials = "user=root&password=ptrS1358";
 
   public Connection conexion(){
    Connection conectar = null;
@@ -114,21 +114,26 @@ public String consultarPartidas(int playerBool){
  }
 
 // Inserts
-  public void insertarPuntaje(int puntPlayer1, int puntPlayer2, int ganador){
+  public boolean insertarPuntaje(int puntPlayer1, int puntPlayer2, int ganador){
+    		boolean insertBool = false;
 		String insertScore = "INSERT INTO pong.juego (puntaje_jugador1, puntaje_jugador2, ganador) VALUES ("+ puntPlayer1 +","+ puntPlayer2 + "," + ganador + ")";
 		ResultSet resultset = null;
 		try( Connection conector = conexion();PreparedStatement prepareInsert = conector.prepareStatement(insertScore, Statement.RETURN_GENERATED_KEYS);){
-			prepareInsert.execute();
-		 	resultset = prepareInsert.getGeneratedKeys();
+			insertBool = true;
+			if(prepareInsert.execute()){
+	    			cerrarConexion(conector);
+				return insertBool;
+			}
+		 	//resultset = prepareInsert.getGeneratedKeys();
 
 			// Print the ID of the inserted row.
-			while (resultset.next()) {
-				System.out.println("Generated: " + resultset.getString(0));
-			}
-	    cerrarConexion(conector);
+			//while (resultset.next()) {
+				//System.out.println("Generated: " + resultset.getString(0));
+			//}
 
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
- 	}
+		return insertBool;
+  }
 }
