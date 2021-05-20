@@ -13,6 +13,7 @@ public class Juegos<bolita> extends javax.swing.JFrame implements KeyListener {
 	private JLabel labelcontador;
 	private JLabel fondo;
 	private JLabel labelcontador2;
+	private JLabel labelnombre;
 
 	private JMenuBar menuBar;
 	private JMenu menuResultado;
@@ -51,13 +52,18 @@ public class Juegos<bolita> extends javax.swing.JFrame implements KeyListener {
 
 		//para poner fondo
 		((JPanel) getContentPane()).setOpaque(false);
-		ImageIcon imagen = new ImageIcon(this.getClass().getResource("mesapinpong1.jpg"));
+		ImageIcon imagen = new ImageIcon(this.getClass().getResource("mesanegra.png"));
         
 		labelcontador = new JLabel("0");
 		labelcontador.setForeground(Color.WHITE);
 		labelcontador.setFont(new Font("Monospaced", Font.BOLD, 17));
 		labelcontador.setBounds(93, 0, 73, 18);
 		panel.add(labelcontador);
+
+		labelnombre = new JLabel("Pong Game");
+		labelnombre.setForeground(Color.WHITE);
+		labelnombre.setBounds(250,2,80,20);
+		panel.add(labelnombre);
 
 		labelcontador2 = new JLabel("0");
 		labelcontador2.setForeground(Color.WHITE);
