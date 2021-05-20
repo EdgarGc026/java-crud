@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.*;
 
 import java.util.ArrayList;
@@ -24,6 +26,16 @@ public class CRUD extends JFrame{
     this.setVisible(true);
     this.setSize(600,600);
     this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    this.addWindowListener(new WindowAdapter() {
+      public void windowClosing(WindowEvent windowevent){
+        System.out.println("Me has cerrado, mi rey");
+        if(windowevent.getNewState() == 0){
+          Juegos.continuar  = true;
+          System.out.println("Entre aqui, el valor de continuar es:" +Juegos.continuar);
+        }
+      }
+    });
+
 
     //conf panel
     GridLayout grid = new GridLayout(2,2);

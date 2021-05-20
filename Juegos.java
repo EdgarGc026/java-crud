@@ -17,7 +17,7 @@ public class Juegos<bolita> extends javax.swing.JFrame implements KeyListener {
 	private JMenuBar menuBar;
 	private JMenu menuResultado;
 	private JMenuItem menuVerResultados;
-	private static boolean continuar = true;
+	public static boolean continuar = true;
 
 	public static void main(String[] args) throws InterruptedException {
 
@@ -31,7 +31,9 @@ public class Juegos<bolita> extends javax.swing.JFrame implements KeyListener {
 				frame.repaint();
 				frame.setVisible(true);
 				Thread.sleep(300);
+				System.out.println("Pero, por aca ando, tambien we");
 			}
+			System.out.println("Entre aqui");
 		}
 	}
 
@@ -136,7 +138,6 @@ public class Juegos<bolita> extends javax.swing.JFrame implements KeyListener {
 
 		if(bolita.TocaFondo()){
 			gameOver();
-
 		}
 		
 	}
